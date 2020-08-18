@@ -15,6 +15,8 @@ github.com/json-iterator/go v1.1.9/go.mod h1:KdQUCv79m/52Kvf8AW2vK1V8akMuk1QjK/u
 github.com/judesantos/go-bookstore_oauth v0.0.0-20200817225749-a4a769a55a98/go.mod h1:vp7RX+sFv9z7ZTXaRx49qEXkiY4wxWN9iDVBu282RXk=
 github.com/judesantos/go-bookstore_users_api v0.0.0-20200817233303-e8ee270dfa7e h1:0jArZh1Y18VQ6c7adBvTV4/HRjzgJoCDZxmPXlDcbqo=
 github.com/judesantos/go-bookstore_users_api v0.0.0-20200817233303-e8ee270dfa7e/go.mod h1:8ZGgSjJUR5L3gTvQH00ymdDgZry2M+r+xtn5BP24vag=
+github.com/judesantos/go-bookstore_utils v0.0.0-20200818010935-7001101b3da5 h1:jQF8SPZgdow/EL5tGSjxrIKlVKkmw8/KJPm6xMeGg90=
+github.com/judesantos/go-bookstore_utils v0.0.0-20200818010935-7001101b3da5/go.mod h1:R7PngamtyZX7pjQ2bxEBYWTdI1jFJBu17W31XJPVblQ=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=
 github.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=

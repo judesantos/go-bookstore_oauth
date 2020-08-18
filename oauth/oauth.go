@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/judesantos/go-bookstore_users_api/utils/errors"
+	"github.com/judesantos/go-bookstore_utils/rest_errors"
 	"github.com/mercadolibre/golang-restclient/rest"
 )
 
@@ -77,7 +77,7 @@ func GetClientId(req *http.Request) int64 {
 //
 // AuthenticateRequest - login user
 //
-func AuthenticateRequest(req *http.Request) *errors.RestError {
+func AuthenticateRequest(req *http.Request) *rest_errors.RestError {
 	if req == nil {
 		return nil
 	}
@@ -112,20 +112,20 @@ func cleanRequest(req *http.Request) {
 }
 
 // getAccessToken - get access token from remote oauth service
-func getAccessToken(accessTokenId string) (*accessToken, *errors.RestError) {
+func getAccessToken(accessTokenId string) (*accessToken, *rest_errors.RestError) {
 
 	res := oauthRestClient.Get(
 		fmt.Sprintf("/oauth/access_token?access_token_id=%s", accessTokenId))
 	if res == nil || res.Response == nil {
-		return nil, errors.InternalServerError(
+		return nil, rest_errors.InternalServerError(
 			"Access token error, invalid rest response")
 	}
 
 	if res.StatusCode > 299 {
-		var rerr errors.RestError
+		var rerr rest_errors.RestError
 		err := json.Unmarshal(res.Bytes(), &rerr)
 		if err != nil {
-			return nil, errors.InternalServerError(
+			return nil, rest_errors.InternalServerError(
 				"Access token error, interface error")
 		}
 		return nil, &rerr
@@ -134,7 +134,7 @@ func getAccessToken(accessTokenId string) (*accessToken, *errors.RestError) {
 	var at accessToken
 
 	if err := json.Unmarshal(res.Bytes(), &at); err != nil {
-		return nil, errors.InternalServerError(
+		return nil, rest_errors.InternalServerError(
 			"Access token error, can not process response")
 	}
 
