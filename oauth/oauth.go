@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/judesantos/go-bookstore_oauth/oauth/errors"
+	"github.com/judesantos/go-bookstore_users_api/utils/errors"
 	"github.com/mercadolibre/golang-restclient/rest"
 )
 
