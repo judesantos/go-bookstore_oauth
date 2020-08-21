@@ -2,6 +2,7 @@ package oauth
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -77,7 +78,7 @@ func GetClientId(req *http.Request) int64 {
 //
 // AuthenticateRequest - login user
 //
-func AuthenticateRequest(req *http.Request) *rest_errors.RestError {
+func AuthenticateRequest(req *http.Request) rest_errors.IRestError {
 	if req == nil {
 		return nil
 	}
@@ -112,30 +113,31 @@ func cleanRequest(req *http.Request) {
 }
 
 // getAccessToken - get access token from remote oauth service
-func getAccessToken(accessTokenId string) (*accessToken, *rest_errors.RestError) {
+func getAccessToken(accessTokenId string) (*accessToken, rest_errors.IRestError) {
 
 	res := oauthRestClient.Get(
 		fmt.Sprintf("/oauth/access_token?access_token_id=%s", accessTokenId))
 	if res == nil || res.Response == nil {
 		return nil, rest_errors.InternalServerError(
-			"Access token error, invalid rest response")
+			"Access token error, invalid rest response",
+			errors.New("oauth client failed to get access token"))
 	}
 
 	if res.StatusCode > 299 {
-		var rerr rest_errors.RestError
+		var rerr rest_errors.IRestError
 		err := json.Unmarshal(res.Bytes(), &rerr)
 		if err != nil {
 			return nil, rest_errors.InternalServerError(
-				"Access token error, interface error")
+				"Access token error, interface error", err)
 		}
-		return nil, &rerr
+		return nil, rerr
 	}
 
 	var at accessToken
 
 	if err := json.Unmarshal(res.Bytes(), &at); err != nil {
 		return nil, rest_errors.InternalServerError(
-			"Access token error, can not process response")
+			"Access token error, can not process response", err)
 	}
 
 	return &at, nil
