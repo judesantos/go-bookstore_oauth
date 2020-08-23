@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/federicoleon/golang-restclient/rest"
 	"github.com/judesantos/go-bookstore_utils/rest_errors"
-	"github.com/mercadolibre/golang-restclient/rest"
 )
 
 const (
@@ -79,6 +79,9 @@ func GetClientId(req *http.Request) int64 {
 // AuthenticateRequest - login user
 //
 func AuthenticateRequest(req *http.Request) rest_errors.IRestError {
+
+	fmt.Println("Enter oauth.AuthenticateRequest()")
+
 	if req == nil {
 		return nil
 	}
